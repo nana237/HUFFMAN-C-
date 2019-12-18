@@ -1,0 +1,143 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.IO;
+
+namespace CompressionHuffman
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            #region initialisation
+                Noeud[] TNooeudInitial = new Noeud[0];
+                Noeud[] TNoeudSecondaire = new Noeud[0];
+                Liason[] TLiason = new Liason[0];
+                Lettre[] TLettre = new Lettre[0];
+                string[] Tvaleur = new string[0];
+                int[] TFrequence = new int[0]; 
+            #endregion
+
+            string[,] freq = new string[0,0];
+            string[] TlettreNormal = new string[0];
+            string decompresser2 = "";
+            
+            string path = "fichier.txt";
+            string path2 = "fichierCompresser.txt";
+            string path3 = "fichierCompresser2.txt";
+
+            
+
+            StreamWriter newDoc;
+            StreamWriter newDoc2;
+            StreamWriter newDoc3;
+           
+            
+            //path = "FichierCompresser";
+
+            string valeur;
+            string compresser = "";
+            string[] Tbit= new string[0];
+
+
+            if (!File.Exists(path)) { 
+                newDoc = File.CreateText(path);
+                newDoc.WriteLine("bonjour_les_zeros");
+                //newDoc.WriteLine("bonjour_les_zeros");
+                newDoc.Close();
+            }
+
+            
+            // StreamReader texte = File.OpenText(path);
+            //while (texte.Peek()>0)// tant qu'il ya une ligne a lire
+            //{
+            //     valeur = texte.ReadLine();
+            //}
+            //Stream texte = File.OpenRead(path);
+            valeur = File.ReadAllText(path);
+            
+            Console.WriteLine(valeur);
+            //valeur = "réalisé par Tachum et Nana !";
+            Arbre.genererTableFrequence(valeur, ref Tvaleur, ref TFrequence);
+            Arbre.genererTlettre(ref TLettre,ref Tvaleur);
+            Arbre.genererTNoeudInitial(ref TNooeudInitial,ref TFrequence);
+
+            for (int i = 0; i < TLettre.Length; i++)
+            {
+                Console.WriteLine(TLettre[i].Valeur + " " + TLettre[i].Numero + "  --  " + TNooeudInitial[i].Numero + "  " + TNooeudInitial[i].Val);
+            }
+            Console.WriteLine("salut a tous");
+
+            Arbre.genererArbre(ref TLettre, ref TNooeudInitial,ref TNoeudSecondaire);
+
+            //affichage des noeud initial
+            for (int i = 0; i < TNoeudSecondaire.Length; i++)
+            {
+                Console.WriteLine(TLettre[i].Valeur + " " + TLettre[i].Numero + "  --  " + TNooeudInitial[i].Numero + "  " + TNooeudInitial[i].Val);
+            }
+            Console.WriteLine("affichage des noeuds secondaire");
+            for (int i = 0; i < TNoeudSecondaire.Length; i++)
+            {
+                Console.WriteLine(TNoeudSecondaire[i].Numero + "   " +TNoeudSecondaire[i].Val);
+            }
+
+            Console.WriteLine("debut compression...");
+            Console.ReadKey();
+            //Console.Clear();
+            Arbre.frequence2(TLettre,ref Tbit,ref TlettreNormal);
+            Console.WriteLine("compression \n");
+            compresser = Arbre.compression2(valeur, ref TlettreNormal, ref Tbit);
+           // Console.WriteLine(byte.Parse(compresser));
+
+            
+
+            /*********************************************************************/
+            byte[] bytes = Encoding.ASCII.GetBytes(compresser);
+            File.WriteAllBytes(path2,bytes);
+
+            if (!File.Exists(path3))
+            {
+                newDoc3 = File.CreateText(path3);
+                newDoc3.Write(compresser);
+            }
+
+            string texte = "wayaye";
+            Console.WriteLine(texte);
+            Console.WriteLine("decompression ... \n");
+            Console.ReadKey();
+
+            decompresser2= (File.ReadAllBytes(path2)).ToString();
+            decompresser2 = Arbre.decompression(compresser,TlettreNormal,Tbit);
+            Console.WriteLine(decompresser2);
+            //freq= Arbre.frequenceF(TLettre);
+            
+            //convertirTlettre(valeur,ref TlettreNormal);
+            
+
+            //Arbre.AfficherTableauBit(Arbre.compresionn(TlettreNormal, freq));
+            path="FichierCompresser";
+           // StreamWriter fichierCompresser = File.WriteAllBytes(path,compresser.);
+            Console.ReadKey();
+        }
+       static void  remplir( int[] t) {
+            for (int i = 0; i < t.Length; i++)
+            {
+                t[i] = i + 1;
+            }
+        }
+
+       private static void convertirTlettre(string texte, ref string[] TlettreNormal) {
+           TlettreNormal = new string[texte.ToCharArray().Length];
+           int i = 0;
+           foreach (var lettre in texte.ToCharArray())
+           {
+               TlettreNormal[i] = lettre.ToString();
+               i += 1;
+           }
+       }
+
+
+    }
+}
