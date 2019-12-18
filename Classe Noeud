@@ -1,0 +1,77 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CompressionHuffman
+{
+    public class Noeud
+    {
+        int val;
+        int nbgauche;
+        int nbdroite;
+        int numero;
+        string position;
+
+
+
+        #region les get et set
+        public int Val
+        {
+            get { return val; }
+            set { val = value; }
+        }
+
+        public int Nbgauche
+        {
+            get { return nbgauche; }
+            set { nbgauche = value; }
+        }
+
+        public int Nbdroite
+        {
+            get { return nbdroite; }
+            set { nbdroite = value; }
+        }
+
+
+        public int Numero
+        {
+            get { return numero; }
+            set { numero = value; }
+        }
+
+        public string Position
+        {
+            get { return position; }
+            set { position = value; }
+        } 
+        #endregion
+        
+        
+        
+
+        public Noeud() {
+             val=0;
+             nbgauche = 0;
+             nbdroite = 0;
+             numero = 0;
+            position="";
+        }
+
+        public Noeud(int val,int nbgauche,int nbdroite,int numero,string position)
+        {
+            this.val = val;
+            this.nbgauche = nbgauche;
+            this.nbdroite = nbdroite;
+            this.numero = numero;
+            this.position = position;
+        }
+
+        public override string ToString()
+        {
+            return  "valeur: " + this.val + "| nombre de gauche: " + this.nbgauche + "| nombre de droite: " + this.nbdroite + "| numero " +this.numero + "| position: " + this.position;
+        }
+    }
+}
