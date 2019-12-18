@@ -1,0 +1,67 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CompressionHuffman
+{
+    public class Liason
+    {
+        int numero;
+        string  position;
+        int     indiceNoeudInitial;
+        int     indiceNoeudFinal;
+        int     valeur;
+
+        #region les get et set
+        public int Numero
+        {
+            get { return this.numero; }
+            set { this.numero = value; }
+        }
+        public string Position
+        {
+            get { return this.position; }
+            set { this.position = value; }
+        }
+        public int IndiceNoeudInitial
+        {
+            get { return this.indiceNoeudInitial; }
+            set { this.indiceNoeudInitial = value; }
+        }
+        public int IndiceNoeudFinal
+        {
+            get { return this.indiceNoeudFinal; }
+            set { this.indiceNoeudFinal = value; }
+        }
+        public int Valeur
+        {
+            get { return this.valeur; }
+            set { this.valeur = value; }
+        } 
+        #endregion
+
+        public Liason()
+        {
+            numero = 0;
+            position = "";
+            indiceNoeudInitial = 0;
+            indiceNoeudFinal = 0;
+            Valeur = 0;
+        }
+        public Liason(int numero,string position, int indiceNoeudInitial, int indiceNoeudFinal, int Valeur)
+        {
+            this.numero = numero;
+            this.position = position;
+            this.indiceNoeudInitial = indiceNoeudInitial;
+            this.indiceNoeudFinal = indiceNoeudFinal;
+            this.Valeur = Valeur;
+        }
+
+        public override string ToString()
+        {
+            return "numero: " + this.numero + "| indiceNoeudInitial: " + this.indiceNoeudInitial + "| indiceNoeudFinal: " + this.indiceNoeudFinal + "| Valeur " + this.Valeur + "| position: " + this.position;
+        }
+    }
+}
