@@ -1,0 +1,49 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CompressionHuffman
+{
+    public class Lettre
+    {
+        int numero;
+        string valeur;
+        public int[] tabCryptage;
+
+        public int Numero
+        {
+            get { return numero; }
+            set { numero = value; }
+        }
+
+        public string Valeur
+        {
+            get { return valeur; }
+            set { valeur = value; }
+        }
+
+        public override string ToString()
+        {
+            return "valeur: " + this.valeur + "| numero " + this.numero ;
+        }
+
+        public Lettre() {
+            numero=0;
+            valeur="";
+            tabCryptage = new int[0];
+        }
+
+        public Lettre(int numero,string valeur,int[] tabCryptage)
+        {
+            this.numero = numero;
+            this.valeur = valeur;
+            this.tabCryptage = tabCryptage;
+        }
+
+
+
+        
+    }
+}
